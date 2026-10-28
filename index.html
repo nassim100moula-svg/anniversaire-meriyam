@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pour Meriyam ❤️</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #9e285d;
+  background: linear-gradient(145deg,#ffe0ee,#ffc2df,#fff0f7);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+main {
+  max-width: 550px;
+  margin: auto;
+  padding: 65px 20px;
+  position: relative;
+  z-index: 2;
+}
+h1 { font-size: 36px; }
+h2 { font-size: 25px; }
+p { line-height: 1.7; }
+.card {
+  background: #ffffffb9;
+  border: 2px solid white;
+  border-radius: 25px;
+  padding: 25px 18px;
+  margin: 25px 0;
+  box-shadow: 0 8px 30px #db6b9d30;
+}
+button {
+  border: 0;
+  border-radius: 50px;
+  padding: 15px 22px;
+  margin: 7px;
+  background: #f45c9e;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 12px #d94a8540;
+  transition: transform .2s;
+  touch-action: manipulation;
+}
+button:active { transform: scale(.92); }
+.heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+  animation: fly 3s linear forwards;
+}
+@keyframes fly {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  100% { transform: translateY(-110vh) rotate(35deg); opacity: 0; }
+}
+@keyframes fall {
+  0% { transform: translateY(-10vh); opacity: 1; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+#surprise {
+  display: none;
+  animation: pop .6s ease-out;
+}
+#bigHeart {
+  font-size: 70px;
+  display: inline-block;
+  transition: transform .4s;
+}
+#counter { font-size: 20px; font-weight: bold; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Joyeux anniversaire ma femme ❤️</h1>
+  <p>Meriyam 💗</p>
+
+  <div class="card">
+    <h2>Pour toi princesse</h2>
+    <p>Jtai préparé un petit truc</p>
+    <p>Vsy regarde 😭❤️</p>
+    <button onclick="rain()">Pluie de cœurs 💗</button>
+  </div>
+
+  <div class="card">
+    <h2>♡</h2>
+    <p>Appuie sur les boutons</p>
+    <button onclick="burst()">Explosion de cœurs</button>
+    <button onclick="confetti()">Confettis 🎉</button>
+    <button onclick="stars()">Étoiles ✨</button>
+  </div>
+
+  <div class="card">
+    <h2>❤️</h2>
+    <p>Appuie sur le cœur</p>
+    <div id="bigHeart" onclick="grow()" style="cursor:pointer">❤️</div>
+    <p id="counter">0</p>
+  </div>
+
+  <div class="card">
+    <h2>Encore un peu 💗</h2>
+    <button onclick="balloons()">Ballons 🎈</button>
+    <button onclick="heartsEverywhere()">Encore des cœurs</button>
+  </div>
+
+  <div class="card">
+    <h2>🎵 Awedak — Ayed</h2>
+    <p>Pour lancer la musique</p>
+    <button onclick="window.open('https://www.youtube.com/results?search_query=Ayed+Awedak','_blank')">
+      Lancer la musique 🎵
+    </button>
+    <p style="font-size:12px">La musique s'ouvre sur YouTube.</p>
+  </div>
+
+  <div class="card">
+    <h2>Dernière surprise ❤️</h2>
+    <button id="finalButton" onclick="reveal()">Ouvrir ❤️</button>
+    <div id="surprise">
+      <h2>Joyeux anniversaire ma femme ❤️</h2>
+      <p>
+        Meriyam je t'aime w'Allah.
+        Tes yeux, tes lèvres, ta voix,
+        tout chez toi est incroyable.
+        J'espère que tu vas passer
+        le meilleur anniversaire possible
+        ma princesse. Nhebbek omri ❤️
+      </p>
+      <p><b>Ton homme ❤️</b></p>
+    </div>
+  </div>
+</main>
+
+<script>
+const emojis = ["❤️","💗","💕","💖","💘","🩷"];
+
+function spawn(symbol, mode="up") {
+  const e = document.createElement("div");
+  e.className = "heart";
+  e.textContent = symbol;
+  e.style.left = Math.random()*95 + "vw";
+  e.style.fontSize = (18+Math.random()*28)+"px";
+  e.style.top = mode==="down" ? "-60px" : "100vh";
+  e.style.animation = mode==="down"
+    ? "fall 3s linear forwards"
+    : "fly 3s linear forwards";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),3100);
+}
+function shower(items, count, mode="up") {
+  for(let i=0;i<count;i++){
+    setTimeout(()=>{
+      spawn(items[Math.floor(Math.random()*items.length)],mode);
+    },i*75);
+  }
+}
+function rain(){ shower(emojis,65,"down"); }
+function burst(){ shower(emojis,80); }
+function confetti(){ shower(["🎉","🎊","✨","💗"],75,"down"); }
+function stars(){ shower(["⭐","✨","🌟"],65); }
+function balloons(){ shower(["🎈","💗","🎈"],55); }
+function heartsEverywhere(){ shower(emojis,110); }
+
+let clicks=0;
+function grow(){
+  clicks++;
+  document.getElementById("counter").textContent=clicks+" ❤️";
+  const heart=document.getElementById("bigHeart");
+  heart.style.transform="scale(1.3)";
+  setTimeout(()=>heart.style.transform="scale(1)",250);
+  spawn("💗");
+}
+function reveal(){
+  document.getElementById("finalButton").style.display="none";
+  document.getElementById("surprise").style.display="block";
+  rain();
+  setTimeout(burst,1200);
+}
+</script>
+</body>
+</html>
